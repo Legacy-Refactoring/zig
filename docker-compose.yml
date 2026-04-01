@@ -13,7 +13,12 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
 
-  lang:
+  zig:
+    image: ziglang/zig:0.13.0
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: zig run legacy.zig
 
 volumes:
   postgres_data:
